@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% block title %}
+    Update thesis
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Make changes</h1>
+    </div>
+
+    <div class="row">
+        <div class="card shadow mb-4 w-100">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary text-center">Fill all the fields, please</h6>
+            </div>
+            <div class="card-body">
+
+                <form method="post" class="form" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <div class="form-group row">
+                        <label for="title_thesis" class="form-label">Title:</label>
+                        <input type="text" class="form-control form-control-user" id="title_thesis"
+                               placeholder="Title" name="title" value="{{ thesis.title }}">
+
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="description_thesis" class="form-label">Description:</label>
+                        <textarea type="text" class="form-control form-control-user" id="description_thesis"
+                                  placeholder="Description" name="description">{{ thesis.description }}</textarea>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="content" id="content_thesis" lang="en">
+                            <label class="custom-file-label" for="content_thesis">Seleccionar Archivo</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <button type="submit" class="btn btn-primary w-25">Update</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

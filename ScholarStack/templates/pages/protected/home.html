@@ -1,0 +1,73 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Home</h1>
+        <a href="{% url 'upload-thesis' %}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i
+                class="fa-solid fa-upload"></i> Upload new</a>
+    </div>
+
+    <div class="row">
+        <div class="card shadow mb-4 w-100">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary text-center">Management your theses here!</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Published at</th>
+                            <th>Updated</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Published at</th>
+                            <th>Updated</th>
+                            <th>Options</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for thesis in theses %}
+                            <tr>
+                                <td>{{ thesis.title }}</td>
+                                <td>{{ thesis.description }}</td>
+                                <td>{{ thesis.created_at|date }}</td>
+                                <td>{{ thesis.updated_at|date }}</td>
+                                <td>
+                                    <div class="d-flex" style="column-gap: 0.125rem;">
+                                        <a href="/media/{{ thesis.content }}" target="_blank"
+                                           download="_{{ thesis.title }}.pdf" class="btn btn-primary">
+                                            <i class="fa-solid fa-download"></i>
+                                        </a>
+                                        <button class="btn btn-danger delete-thesis" data-toggle="modal"
+                                                data-target="#delete_thesis" data-delete-id="{{ thesis.pk }}">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                        <a href="/thesis/update/{{ thesis.pk }}" class="btn btn-info">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

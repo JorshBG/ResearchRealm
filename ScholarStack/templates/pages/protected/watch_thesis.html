@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="card shadow mb-4 w-100">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary text-center">{{ thesis.title }}</h6>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <p class="text-primary text-center font-weight-bold w-100">
+                        {{ thesis.description }}
+                    </p>
+                </div>
+                <div class="row d-flex justify-content-between mb-3">
+                    <p><span class="text-primary">Published at:</span> {{ thesis.created_at|date }}</p>
+                    <p><span class="text-primary">Published by:</span> {{ thesis.user.first_name }} {{ thesis.user.last_name }}</p>
+                    <p><span class="text-primary">Last updated</span> {{ thesis.updated_at|date }}</p>
+                </div>
+
+                <div class="row" id="embedded-pdf">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        #embedded-pdf {
+            margin: auto;
+            width: 75%;
+            max-height: 900px;
+            height: 800px;
+        }
+
+        @media screen and (max-width: 1539px) {
+            #embedded-pdf {
+                height: 650px;
+                width: auto;
+            }
+
+        }
+    </style>
+
+    <script>PDFObject.embed("http://localhost:8000/media/{{ thesis.content }}", "#embedded-pdf");</script>
+
+{% endblock %}
