@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Upload your magic</h1>
+    </div>
+
+    <div class="row">
+        <div class="card shadow mb-4 w-100">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary text-center">Fill all the fields, please</h6>
+                <p>
+                    {{ errors }}
+                </p>
+            </div>
+            <div class="card-body">
+
+                <form method="post" class="form" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+
+                    <button type="submit">Upload</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
