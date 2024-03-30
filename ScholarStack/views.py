@@ -17,14 +17,6 @@ def index(request):
     return render(request, 'pages/auth/login.html')
 
 
-def error_404(request):
-    return render(request, 'pages/error/404.html')
-
-
-def error_500(request):
-    return render(request, 'pages/error/404.html')
-
-
 def sign_in(request):
     if request.method == 'POST':
 
@@ -33,7 +25,9 @@ def sign_in(request):
         if user is not None:
             login(request, user)
             return redirect('home')
-        return render(request, 'pages/error/500.html')
+        return render(request, 'pages/auth/login.html', {
+            'errors': 'Invalid username or password.'
+        })
 
     return render(request, 'pages/auth/login.html')
 

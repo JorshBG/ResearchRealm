@@ -29,5 +29,10 @@ urlpatterns = [
     path('', include('ScholarStack.urls')),
 ]
 
+
+handler404 = 'ResearchRealm.views.handler404'
+handler500 = 'ResearchRealm.views.handler500'
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

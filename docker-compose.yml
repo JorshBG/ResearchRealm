@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: "django-web"
+    container_name: "ResearchRealm"
     volumes:
       - .:/code
       - /code/.idea/

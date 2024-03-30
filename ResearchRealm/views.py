@@ -4,7 +4,7 @@ from .serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
@@ -48,3 +48,12 @@ def register(request):
 def profile(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+def handler404(request, *args, **kwargs):
+    return render(request, 'pages/error/404.html')
+
+
+def handler500(request, *args, **kwargs):
+    return render(request, 'pages/error/404.html')
+
