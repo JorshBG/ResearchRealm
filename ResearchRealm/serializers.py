@@ -2,6 +2,14 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 
+from ScholarStack.models import Thesis
+
+
+class LoginSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +34,26 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+
+class ThesisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Thesis
+        fields = [
+            'id',
+            'title',
+            'description',
+            'content',
+            'user',
+            'created_at',
+            'updated_at'
+        ]
+
+    def create(self, validated_data):
+        thesis, created = Thesis.objects.get_or_create(**validated_data)
+        if not created:
+            thesis.title = validated_data['title']
+            thesis.description = validated_data['description']
+            thesis.content = validated_data['content']
+            thesis.user = validated_data['user']
+        return thesis

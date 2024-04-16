@@ -26,6 +26,10 @@ urlpatterns = [
     path('login', views.login),
     path('register', views.register),
     path('profile', views.profile),
+    path('thesis/create', views.create_thesis),
+    path('thesis/all', views.index_thesis),
+    path('thesis/<int:id>', views.get_thesis),
+    path('thesis/update/<int:id>', views.update_thesis),
     path('', include('ScholarStack.urls')),
 ]
 
