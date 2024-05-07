@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-
+from django.views.decorators.cache import cache_page
 from django.conf.urls.static import static
 from django.conf import settings
+# from pwa import views as pwa_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,12 +31,13 @@ urlpatterns = [
     path('thesis/all', views.index_thesis),
     path('thesis/<int:id>', views.get_thesis),
     path('thesis/update/<int:id>', views.update_thesis),
+    path('', include('pwa.urls')),
     path('', include('ScholarStack.urls')),
 ]
 
 
-handler404 = 'ResearchRealm.views.handler404'
-handler500 = 'ResearchRealm.views.handler500'
+# handler404 = 'ResearchRealm.views.handler404'
+# handler500 = 'ResearchRealm.views.handler500'
 
 
 if settings.DEBUG:

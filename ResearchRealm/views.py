@@ -1,6 +1,5 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
-
 from ScholarStack.models import Thesis
 from .serializers import UserSerializer, ThesisSerializer, LoginSerializer
 from django.contrib.auth.models import User
